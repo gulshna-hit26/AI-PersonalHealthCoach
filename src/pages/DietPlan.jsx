@@ -174,13 +174,15 @@ const DietPlan = () => {
                         return (
                             <div
                                 key={mealType}
-                                className={`p-4 rounded-lg flex items-start gap-3 transition-all ${isCompleted ? 'bg-secondary/20 border border-secondary/30' : 'bg-white/5'
+                                onClick={() => toggleMeal(dateKey, mealType)}
+                                className={`p-4 rounded-lg flex items-start gap-3 transition-all cursor-pointer ${isCompleted ? 'bg-secondary/20 border border-secondary/30' : 'bg-white/5 hover:bg-white/10'
                                     }`}
                             >
                                 <input
                                     type="checkbox"
                                     checked={isCompleted || false}
                                     onChange={() => toggleMeal(dateKey, mealType)}
+                                    onClick={(e) => e.stopPropagation()}
                                     className="mt-1 w-6 h-6 cursor-pointer accent-secondary"
                                 />
                                 <div className="flex-1">
@@ -239,13 +241,15 @@ const DietPlan = () => {
                                             return (
                                                 <div
                                                     key={mealType}
-                                                    className={`p-3 rounded-lg flex items-start gap-3 transition-all ${isCompleted ? 'bg-secondary/20 border border-secondary/30' : 'bg-white/5'
+                                                    onClick={() => toggleMeal(day, mealType)}
+                                                    className={`p-3 rounded-lg flex items-start gap-3 transition-all cursor-pointer ${isCompleted ? 'bg-secondary/20 border border-secondary/30' : 'bg-white/5 hover:bg-white/10'
                                                         }`}
                                                 >
                                                     <input
                                                         type="checkbox"
                                                         checked={isCompleted || false}
                                                         onChange={() => toggleMeal(day, mealType)}
+                                                        onClick={(e) => e.stopPropagation()}
                                                         className="mt-1 w-5 h-5 cursor-pointer accent-secondary"
                                                     />
                                                     <div className="flex-1">
@@ -307,11 +311,16 @@ const DietPlan = () => {
                                         const isCompleted = completedMeals[key];
 
                                         return (
-                                            <div key={mealType} className="flex items-center gap-2">
+                                            <div
+                                                key={mealType}
+                                                onClick={() => toggleMeal(dateKey, mealType)}
+                                                className="flex items-center gap-2 cursor-pointer hover:bg-white/5 p-1 rounded"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     checked={isCompleted || false}
                                                     onChange={() => toggleMeal(dateKey, mealType)}
+                                                    onClick={(e) => e.stopPropagation()}
                                                     className="w-4 h-4 cursor-pointer accent-secondary"
                                                 />
                                                 <div className="flex-1">
@@ -344,8 +353,8 @@ const DietPlan = () => {
                         key={mode}
                         onClick={() => setViewMode(mode)}
                         className={`px-4 py-2 rounded-lg font-medium transition-all ${viewMode === mode
-                                ? 'bg-primary text-darker'
-                                : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                            ? 'bg-primary text-darker'
+                            : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
                             }`}
                     >
                         {mode.charAt(0).toUpperCase() + mode.slice(1)}

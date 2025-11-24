@@ -201,13 +201,15 @@ const WorkoutPlan = () => {
                                             return (
                                                 <div
                                                     key={idx}
-                                                    className={`p-3 rounded-lg flex items-start gap-3 transition-all ${isCompleted ? 'bg-secondary/20 border border-secondary/30' : 'bg-white/5'
+                                                    onClick={() => toggleExercise(day, idx)}
+                                                    className={`p-3 rounded-lg flex items-start gap-3 transition-all cursor-pointer ${isCompleted ? 'bg-secondary/20 border border-secondary/30' : 'bg-white/5 hover:bg-white/10'
                                                         }`}
                                                 >
                                                     <input
                                                         type="checkbox"
                                                         checked={isCompleted || false}
                                                         onChange={() => toggleExercise(day, idx)}
+                                                        onClick={(e) => e.stopPropagation()}
                                                         className="mt-1 w-5 h-5 cursor-pointer accent-secondary"
                                                     />
                                                     <div className="flex-1">

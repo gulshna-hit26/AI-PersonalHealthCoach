@@ -3,6 +3,7 @@ import React from 'react';
 const Sidebar = ({ activeTab, setActiveTab }) => {
     const menuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+        { id: 'habits', label: 'Daily Habits', icon: '✨' },
         { id: 'chat', label: 'AI Coach', icon: '🤖' },
         { id: 'diet', label: 'Diet Plan', icon: '🍽️' },
         { id: 'workout', label: 'Workout', icon: '💪' },

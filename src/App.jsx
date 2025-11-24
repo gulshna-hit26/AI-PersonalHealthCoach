@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import AIChat from './pages/AIChat';
 import DietPlan from './pages/DietPlan';
 import WorkoutPlan from './pages/WorkoutPlan';
+import DailyHabits from './pages/DailyHabits';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -12,6 +13,8 @@ function App() {
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;
+      case 'habits':
+        return <DailyHabits />;
       case 'chat':
         return <AIChat />;
       case 'diet':
