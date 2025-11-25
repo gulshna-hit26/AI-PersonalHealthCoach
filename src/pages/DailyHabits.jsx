@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Droplets, Sun, Moon, Footprints, Brain, BookOpen, Sparkles, Flame, PartyPopper } from 'lucide-react';
 
 const DEFAULT_HABITS = [
-    { id: 'water', icon: '💧', name: 'Drink 8 glasses of water', points: 15, desc: 'Stay hydrated throughout the day' },
-    { id: 'wakeup', icon: '🌅', name: 'Wake up before 7 AM', points: 10, desc: 'Start your day early and energized' },
-    { id: 'sleep', icon: '😴', name: 'Sleep by 10 PM', points: 10, desc: 'Get quality rest for recovery' },
-    { id: 'steps', icon: '🏃', name: '10,000 steps today', points: 15, desc: 'Meet your daily step goal' },
-    { id: 'meditation', icon: '🧘', name: '5-min meditation', points: 10, desc: 'Practice mindfulness and reduce stress' },
-    { id: 'reading', icon: '📚', name: 'Read for 20 minutes', points: 10, desc: 'Learn something new every day' },
+    { id: 'water', icon: <Droplets size={24} />, name: 'Drink 8 glasses of water', points: 15, desc: 'Stay hydrated throughout the day' },
+    { id: 'wakeup', icon: <Sun size={24} />, name: 'Wake up before 7 AM', points: 10, desc: 'Start your day early and energized' },
+    { id: 'sleep', icon: <Moon size={24} />, name: 'Sleep by 10 PM', points: 10, desc: 'Get quality rest for recovery' },
+    { id: 'steps', icon: <Footprints size={24} />, name: '10,000 steps today', points: 15, desc: 'Meet your daily step goal' },
+    { id: 'meditation', icon: <Brain size={24} />, name: '5-min meditation', points: 10, desc: 'Practice mindfulness and reduce stress' },
+    { id: 'reading', icon: <BookOpen size={24} />, name: 'Read for 20 minutes', points: 10, desc: 'Learn something new every day' },
 ];
 
 const DailyHabits = () => {
@@ -100,7 +101,9 @@ const DailyHabits = () => {
     return (
         <div className="p-8 h-screen overflow-y-auto">
             <header className="mb-8">
-                <h2 className="text-3xl font-bold text-white">Daily Habits ✨</h2>
+                <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                    Daily Habits <Sparkles className="w-8 h-8 text-secondary" />
+                </h2>
                 <p className="text-gray-400">Build healthy habits and earn extra points!</p>
             </header>
 
@@ -128,7 +131,9 @@ const DailyHabits = () => {
                 </div>
                 <div className="glass-card p-6">
                     <h3 className="text-gray-400 text-sm mb-2">Streak</h3>
-                    <div className="text-4xl font-bold text-secondary">{streak} 🔥</div>
+                    <div className="text-4xl font-bold text-secondary flex items-center gap-2">
+                        {streak} <Flame className="w-8 h-8 text-orange-500" />
+                    </div>
                     <p className="text-xs text-gray-500 mt-1">consecutive days</p>
                 </div>
             </div>
@@ -154,8 +159,8 @@ const DailyHabits = () => {
                             <div
                                 key={habit.id}
                                 className={`p-5 rounded-xl flex items-start gap-4 transition-all cursor-pointer ${isCompleted
-                                        ? 'bg-secondary/20 border-2 border-secondary/30 shadow-lg'
-                                        : 'bg-white/5 border-2 border-white/10 hover:border-white/20'
+                                    ? 'bg-secondary/20 border-2 border-secondary/30 shadow-lg'
+                                    : 'bg-white/5 border-2 border-white/10 hover:border-white/20'
                                     }`}
                                 onClick={() => toggleHabit(habit.id, habit.points)}
                             >
@@ -169,7 +174,7 @@ const DailyHabits = () => {
                                 <div className="flex-1">
                                     <div className="flex items-start justify-between mb-2">
                                         <div className="flex items-center gap-2">
-                                            <span className="text-2xl">{habit.icon}</span>
+                                            <span className="text-2xl text-primary">{habit.icon}</span>
                                             <h4 className={`text-lg font-bold ${isCompleted ? 'line-through text-gray-500' : 'text-white'
                                                 }`}>
                                                 {habit.name}
@@ -188,10 +193,12 @@ const DailyHabits = () => {
 
                 {/* Motivational Message */}
                 {progress.percent === 100 && (
-                    <div className="mt-6 p-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg border border-primary/30">
+                    <div className="mt-6 p-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg border border-primary/30 flex items-center justify-center gap-2">
+                        <PartyPopper className="w-6 h-6 text-secondary" />
                         <p className="text-center text-lg font-bold text-white">
-                            🎉 Amazing! You've completed all your habits today! Keep up the great work! 🎉
+                            Amazing! You've completed all your habits today! Keep up the great work!
                         </p>
+                        <PartyPopper className="w-6 h-6 text-secondary" />
                     </div>
                 )}
             </div>

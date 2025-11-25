@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { generatePlans, isConfigured } from '../services/gemini';
+import { Dumbbell, Loader, Sparkles, ChevronDown, ChevronRight } from 'lucide-react';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -117,7 +118,9 @@ const WorkoutPlan = () => {
         <div className="p-8 h-screen overflow-y-auto">
             <header className="mb-8 flex justify-between items-center">
                 <div>
-                    <h2 className="text-3xl font-bold text-white">Workout Plan 💪</h2>
+                    <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                        Workout Plan <Dumbbell className="w-8 h-8 text-secondary" />
+                    </h2>
                     <p className="text-gray-400">Track your weekly exercises and earn points!</p>
                 </div>
                 <button
@@ -127,11 +130,11 @@ const WorkoutPlan = () => {
                 >
                     {isLoading ? (
                         <>
-                            <span className="animate-spin">⏳</span> Generating...
+                            <Loader className="animate-spin w-5 h-5" /> Generating...
                         </>
                     ) : (
                         <>
-                            <span>✨</span> Generate AI Plan
+                            <Sparkles className="w-5 h-5" /> Generate AI Plan
                         </>
                     )}
                 </button>
@@ -189,7 +192,9 @@ const WorkoutPlan = () => {
                                         <span className="text-xl font-bold text-white">{day}</span>
                                         <span className="text-sm text-gray-400">{dayCompleted}/{dayExercises.length} exercises</span>
                                     </div>
-                                    <span className="text-white">{isExpanded ? '▼' : '▶'}</span>
+                                    <span className="text-white">
+                                        {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+                                    </span>
                                 </button>
 
                                 {isExpanded && (

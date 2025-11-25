@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { stepCounter } from '../services/stepCounter';
+import { Footprints, Flame, Droplets, Moon, Play, Pause, AlertTriangle, CheckCircle } from 'lucide-react';
 
 const StatCard = ({ title, value, unit, icon, color }) => (
     <div className="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden group hover:bg-white/10 transition-all">
         <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full opacity-20 blur-xl bg-${color}`}></div>
         <div className="flex justify-between items-start z-10">
             <h3 className="text-gray-400 font-medium">{title}</h3>
-            <span className="text-2xl">{icon}</span>
+            <span className="text-2xl text-primary">{icon}</span>
         </div>
         <div className="z-10">
             <div className="text-3xl font-bold text-white">
@@ -71,9 +72,12 @@ const Dashboard = () => {
     return (
         <div className="p-8 space-y-8 relative">
             {showNotification && (
-                <div className="fixed top-8 right-8 z-50 bg-secondary text-darker px-6 py-4 rounded-xl font-bold shadow-2xl animate-bounce">
-                    ✅ Daily Check-in completed!<br />
-                    <span className="text-sm">+500 Steps | +100 Calories</span>
+                <div className="fixed top-8 right-8 z-50 bg-secondary text-darker px-6 py-4 rounded-xl font-bold shadow-2xl animate-bounce flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6" />
+                    <div>
+                        Daily Check-in completed!<br />
+                        <span className="text-sm font-normal">+500 Steps | +100 Calories</span>
+                    </div>
                 </div>
             )}
 
@@ -86,16 +90,16 @@ const Dashboard = () => {
                     {!isTracking ? (
                         <button
                             onClick={handleStartTracking}
-                            className="bg-secondary text-darker font-bold py-2 px-4 rounded-lg hover:bg-opacity-80 transition-all"
+                            className="bg-secondary text-darker font-bold py-2 px-4 rounded-lg hover:bg-opacity-80 transition-all flex items-center gap-2"
                         >
-                            🚶 Start Tracking
+                            <Play className="w-4 h-4" /> Start Tracking
                         </button>
                     ) : (
                         <button
                             onClick={handleStopTracking}
-                            className="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-80 transition-all"
+                            className="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-80 transition-all flex items-center gap-2"
                         >
-                            ⏸️ Stop Tracking
+                            <Pause className="w-4 h-4" /> Stop Tracking
                         </button>
                     )}
                     <button
@@ -109,14 +113,22 @@ const Dashboard = () => {
 
             {trackingError && (
                 <div className="glass-card p-4 border-l-4 border-yellow-500">
-                    <p className="text-yellow-500 text-sm">⚠️ {trackingError}</p>
+                    <div className="flex items-center gap-2 text-yellow-500 mb-1">
+                        <AlertTriangle className="w-5 h-5" />
+                        <p className="font-bold">Tracking Error</p>
+                    </div>
+                    <p className="text-yellow-500 text-sm">{trackingError}</p>
                     <p className="text-gray-400 text-xs mt-2">Note: Step tracking works best on mobile devices. Make sure you're using HTTPS and grant motion permissions when prompted.</p>
                 </div>
             )}
 
             {isTracking && (
                 <div className="glass-card p-4 border-l-4 border-secondary">
-                    <p className="text-secondary text-sm">✅ Step tracking is active! Walk around with your device to count steps.</p>
+                    <div className="flex items-center gap-2 text-secondary mb-1">
+                        <CheckCircle className="w-5 h-5" />
+                        <p className="font-bold">Tracking Active</p>
+                    </div>
+                    <p className="text-secondary text-sm">Step tracking is active! Walk around with your device to count steps.</p>
                     <button
                         onClick={handleResetSteps}
                         className="text-xs text-gray-400 hover:text-white mt-2 underline"
@@ -127,10 +139,10 @@ const Dashboard = () => {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatCard title="Steps" value={steps.toLocaleString()} unit="/ 10k" icon="👣" color="primary" />
-                <StatCard title="Calories" value={calories.toLocaleString()} unit="kcal" icon="🔥" color="orange-500" />
-                <StatCard title="Water" value="1.2" unit="L" icon="💧" color="blue-500" />
-                <StatCard title="Sleep" value="7h 20m" unit="" icon="😴" color="purple-500" />
+                <StatCard title="Steps" value={steps.toLocaleString()} unit="/ 10k" icon={<Footprints size={28} />} color="primary" />
+                <StatCard title="Calories" value={calories.toLocaleString()} unit="kcal" icon={<Flame size={28} />} color="orange-500" />
+                <StatCard title="Water" value="1.2" unit="L" icon={<Droplets size={28} />} color="blue-500" />
+                <StatCard title="Sleep" value="7h 20m" unit="" icon={<Moon size={28} />} color="purple-500" />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-96">

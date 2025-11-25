@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { sendMessage, isConfigured } from '../services/gemini';
+import { Bot, AlertTriangle, Send } from 'lucide-react';
 
 const AIChat = () => {
     const [messages, setMessages] = useState([
@@ -70,7 +71,9 @@ const AIChat = () => {
     return (
         <div className="h-screen flex flex-col p-6">
             <header className="mb-6">
-                <h2 className="text-3xl font-bold text-white">AI Coach 🤖</h2>
+                <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                    AI Coach <Bot className="w-8 h-8 text-primary" />
+                </h2>
                 <p className="text-gray-400">Ask me anything about your health, diet, or workouts.</p>
             </header>
 
@@ -78,8 +81,8 @@ const AIChat = () => {
                 {messages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[80%] p-4 rounded-2xl ${msg.sender === 'user'
-                                ? 'bg-primary text-darker font-medium rounded-tr-none'
-                                : 'bg-white/10 text-white rounded-tl-none'
+                            ? 'bg-primary text-darker font-medium rounded-tr-none'
+                            : 'bg-white/10 text-white rounded-tl-none'
                             }`}>
                             {msg.text}
                         </div>
@@ -109,8 +112,8 @@ const AIChat = () => {
                     disabled={isLoading}
                     className="flex-1 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
                 />
-                <button onClick={handleSend} disabled={isLoading} className="btn-primary px-8 disabled:opacity-50">
-                    Send
+                <button onClick={handleSend} disabled={isLoading} className="btn-primary px-8 disabled:opacity-50 flex items-center gap-2">
+                    <Send className="w-5 h-5" /> Send
                 </button>
             </div>
         </div>

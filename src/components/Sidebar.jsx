@@ -1,13 +1,14 @@
 import React from 'react';
+import { LayoutDashboard, CheckSquare, Bot, Utensils, Dumbbell, Settings } from 'lucide-react';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
     const menuItems = [
-        { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-        { id: 'habits', label: 'Daily Habits', icon: '✨' },
-        { id: 'chat', label: 'AI Coach', icon: '🤖' },
-        { id: 'diet', label: 'Diet Plan', icon: '🍽️' },
-        { id: 'workout', label: 'Workout', icon: '💪' },
-        { id: 'settings', label: 'Settings', icon: '⚙️' },
+        { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={24} /> },
+        { id: 'habits', label: 'Daily Habits', icon: <CheckSquare size={24} /> },
+        { id: 'chat', label: 'AI Coach', icon: <Bot size={24} /> },
+        { id: 'diet', label: 'Diet Plan', icon: <Utensils size={24} /> },
+        { id: 'workout', label: 'Workout', icon: <Dumbbell size={24} /> },
+        { id: 'settings', label: 'Settings', icon: <Settings size={24} /> },
     ];
 
     return (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Utensils, ChevronDown, ChevronRight } from 'lucide-react';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const MEAL_TYPES = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
@@ -57,7 +58,7 @@ const DietPlan = () => {
     const [currentDate] = useState(new Date());
 
     useEffect(() => {
-        const saved = localStorage.getItem('weeklyDiet Completion');
+        const saved = localStorage.getItem('weeklyDietCompletion');
         if (saved) {
             const data = JSON.parse(saved);
             setCompletedMeals(data.completed || {});
@@ -228,7 +229,9 @@ const DietPlan = () => {
                                         <span className="text-xl font-bold text-white">{day}</span>
                                         <span className="text-sm text-gray-400">{dayCompleted}/4 meals</span>
                                     </div>
-                                    <span className="text-white">{isExpanded ? '▼' : '▶'}</span>
+                                    <span className="text-white">
+                                        {isExpanded ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+                                    </span>
                                 </button>
 
                                 {isExpanded && (
@@ -343,7 +346,9 @@ const DietPlan = () => {
     return (
         <div className="p-8 h-screen overflow-y-auto">
             <header className="mb-8">
-                <h2 className="text-3xl font-bold text-white">Diet Plan 🍽️</h2>
+                <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                    Diet Plan <Utensils className="w-8 h-8 text-primary" />
+                </h2>
                 <p className="text-gray-400">Track your meals and earn points!</p>
             </header>
 
