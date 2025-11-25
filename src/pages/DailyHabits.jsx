@@ -15,6 +15,7 @@ const DailyHabits = () => {
     const [points, setPoints] = useState(0);
     const [streak, setStreak] = useState(0);
     const [currentDate] = useState(new Date());
+    const [isLoaded, setIsLoaded] = useState(false);
 
     // Get today's date key
     const getTodayKey = () => {
@@ -48,10 +49,13 @@ const DailyHabits = () => {
             const today = getTodayKey();
             setCompletedHabits({ [today]: {} });
         }
+        setIsLoaded(true);
     }, []);
 
     // Save data to localStorage whenever it changes
     useEffect(() => {
+        if (!isLoaded) return;
+
         const today = getTodayKey();
         localStorage.setItem('dailyHabitsData', JSON.stringify({
             completed: completedHabits,
@@ -59,7 +63,7 @@ const DailyHabits = () => {
             streak: streak,
             lastDate: today
         }));
-    }, [completedHabits, points, streak]);
+    }, [completedHabits, points, streak, isLoaded]);
 
     // Toggle habit completion
     const toggleHabit = (habitId, habitPoints) => {

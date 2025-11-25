@@ -56,6 +56,7 @@ const DietPlan = () => {
     const [expandedDays, setExpandedDays] = useState({});
     const [viewMode, setViewMode] = useState('weekly');
     const [currentDate] = useState(new Date());
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         const saved = localStorage.getItem('weeklyDietCompletion');
@@ -64,14 +65,17 @@ const DietPlan = () => {
             setCompletedMeals(data.completed || {});
             setPoints(data.points || 0);
         }
+        setIsLoaded(true);
     }, []);
 
     useEffect(() => {
+        if (!isLoaded) return;
+
         localStorage.setItem('weeklyDietCompletion', JSON.stringify({
             completed: completedMeals,
             points: points
         }));
-    }, [completedMeals, points]);
+    }, [completedMeals, points, isLoaded]);
 
     const toggleMeal = (dateKey, mealType) => {
         const key = `${dateKey}-${mealType}`;
